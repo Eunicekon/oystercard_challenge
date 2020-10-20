@@ -1,9 +1,10 @@
 class Card
-  attr_reader :balance, :limit
+  attr_reader :balance, :limit, :fair
 
     def initialize
       @balance = 0
       @limit = 50
+      @fair = 5
     end
   
     def add(a)
@@ -17,6 +18,10 @@ class Card
 
     def limit
       @limit
+    end
+
+    def fair(b)
+      @balance -= b
     end
 
   end

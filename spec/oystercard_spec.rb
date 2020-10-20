@@ -26,4 +26,12 @@ RSpec.describe Card do
     end
   end
 
+  describe "deduct fair from card" do
+    card = Card.new
+    card.balance
+    it "should deduct fair from balance" do
+      expect(card.fair(5)).to eq (-5)
+    end
+  end
+
 end
