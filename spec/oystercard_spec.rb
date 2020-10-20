@@ -35,8 +35,22 @@ RSpec.describe Card do
     end
   end
 
-  describe "touch in and out of barriers" do
-    
+  describe "touch in of barriers" do
+    barrier = Barrier.new
+    barrier.touch_in
+    it "should let me know I've touch my card" do
+      expect(barrier.touch_in).to eq ("You touched in!")
+    end
   end
+
+  describe "touch out of barriers" do
+    barrier = Barrier.new
+    barrier.touch_out
+    it "should tell me I touched out" do
+      expect(barrier.touch_out).to eq ("You touched out!")
+    end
+  end
+
+
 
 end
