@@ -1,4 +1,5 @@
 require 'Card'
+require 'Barrier'
 
 RSpec.describe Card do
 
@@ -32,6 +33,10 @@ RSpec.describe Card do
     it "should deduct fair from balance" do
       expect(card.fair(5)).to eq (-5)
     end
+  end
+
+  describe "touch in and out of barriers" do
+    
   end
 
 end
