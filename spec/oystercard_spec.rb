@@ -1,5 +1,5 @@
-require 'Card'
-require 'Barrier'
+require 'oystercard'
+require 'station'
 
 RSpec.describe Card do
 
@@ -31,26 +31,37 @@ RSpec.describe Card do
     card = Card.new
     card.balance
     it "should deduct fair from balance" do
-      expect(card.fair(5)).to eq (-5)
+      expect(card.fair).to eq (-5)
     end
   end
 
-  describe "touch in of barriers" do
-    barrier = Barrier.new
-    barrier.touch_in
+  describe "touch in " do
+    card = Card.new
+    card.touch_in
     it "should let me know I've touch my card" do
-      expect(barrier.touch_in).to eq ("You touched in!")
+      expect(card.touch_in).to eq ("You touched in!")
     end
   end
 
-  describe "touch out of barriers" do
-    barrier = Barrier.new
-    barrier.touch_out
+  describe "touch out" do
+    card = Card.new
+    card.balance
     it "should tell me I touched out" do
-      expect(barrier.touch_out).to eq ("You touched out!")
+      expect(card.touch_out).to eq (-5)
     end
   end
 
+  describe "pay minimum fair for single journey" do
+    card = Card.new
+    card.balance
+    it "should deduct minimum fair" do
+      expect(card.minimum_fair).to eq (-2)
+    end
+  end
 
+  describe "to tell me where i travelled from" do
+    
+  end
+  
 
 end
