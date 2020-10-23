@@ -30,7 +30,12 @@ class Card
 
     def touch_in(entry_station) #record your location on the card 
       @entry_station = entry_station
-      @in_journey = true
+      if @balance <= @minimum_fair
+        raise "You dont have sufficient money for this trip"
+      else
+        return @in_journey = true
+      end
+      # @in_journey = true
     end
 
     def in_journey?

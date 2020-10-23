@@ -28,7 +28,7 @@ RSpec.describe Card do
   end
 
   describe "deduct_fair_from_card" do
-    it "should deduct fair from balance" do
+    it "should deduct fair from card" do
       subject.fair
       expect(subject.balance).to eq (5)
     end
@@ -37,15 +37,15 @@ RSpec.describe Card do
   describe "#pay_minimum_fair_for_single_journey" do
     it "should deduct minimum fair" do
       subject.minimum_fair
-      expect(subject.balance).to eq (9)
+      expect(subject.balance).to eq (9) 
     end
   end
 
-  # describe "#insufficient_balance" do
+  # describe "#sufficient_funds" do
   #   it "should throw an error if insufficient balance is touched in" do
-  #     actual_value = balance
-  #     expected_value = throw_error
-  #     expect(actual_value).to eq expected_value
+  #     subject.insufficient_funds
+  #     expect{ subject.insufficient_funds }.to raise_error("You dont have sufficient money for this trip")
+  #     expect(subject.balance).to eq (10)
   #   end
   # end
   
