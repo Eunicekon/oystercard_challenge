@@ -2,66 +2,79 @@ require 'oystercard'
 require 'station'
 
 RSpec.describe Card do
+#doubles
+  let(:station) {double("paddington")} #=> everytime we call an entry station, its going to fill it in as paddington
+  let(:subject) {Card.new(10)}
+  let(:exit) {double("bank")}
 
-  describe "#money_on_card" do
-    card = Card.new
-    card.balance
+  describe "#New_card" do
+    # card = Card.new #subject ===> card.new
     it "should tell me that I have money on my card" do
-      expect(card.balance).to eq (0)
-    end
+      expect(subject.balance).to eq (10)  #card in card.balance has been replaced with SUBJECT which is = card.new
+    end  
   end
 
-  describe "add money to card" do
-    card = Card.new
-    card.balance
+  describe "#add_money" do
     it "should add money to card" do
-      expect(card.add(3)).to eq (3)
+      subject.add(3)
+      expect(subject.balance).to eq (13)
+    end
+
+    it "should raise an error if higher limit" do
+      subject.add(3)
+      expect{ subject.add(50) }.to raise_error("You have reached your limit of £50") #syntax for writing/raising and error (look at line 16 for method error)
+      expect(subject.balance).to eq (13)
     end
   end
 
-  describe "set limit of card" do
-    card = Card.new
-    card.add(0)
-    it "should limit your spend" do
-      expect(card.limit).to eq (50)
-    end
-  end
-
-  describe "deduct fair from card" do
-    card = Card.new
-    card.balance
+  describe "deduct_fair_from_card" do
     it "should deduct fair from balance" do
-      expect(card.fair).to eq (-5)
+      subject.fair
+      expect(subject.balance).to eq (5)
     end
   end
 
-  describe "touch in " do
-    card = Card.new
-    card.touch_in
-    it "should let me know I've touch my card" do
-      expect(card.touch_in).to eq ("You touched in!")
-    end
-  end
-
-  describe "touch out" do
-    card = Card.new
-    card.balance
-    it "should tell me I touched out" do
-      expect(card.touch_out).to eq (-5)
-    end
-  end
-
-  describe "pay minimum fair for single journey" do
-    card = Card.new
-    card.balance
+  describe "#pay_minimum_fair_for_single_journey" do
     it "should deduct minimum fair" do
-      expect(card.minimum_fair).to eq (-2)
+      subject.minimum_fair
+      expect(subject.balance).to eq (9)
     end
   end
 
-  describe "to tell me where i travelled from" do
-    
-  end
+  # describe "#insufficient_balance" do
+  #   it "should throw an error if insufficient balance is touched in" do
+  #     actual_value = balance
+  #     expected_value = throw_error
+  #     expect(actual_value).to eq expected_value
+  #   end
+  # end
   
+  describe "#touch_in" do
+    it "should register entry station" do
+      subject.touch_in(station)
+      expect(subject.entry_station).to eq (station)
+    end
+  end
+
+  describe "#in_journey?" do
+    it "should tell me I'm on my journey when I touch in" do
+      subject.touch_in(station)
+      expect(subject.in_journey?).to eq true
+    end
+  end
+
+  describe "#touch_out" do
+    it "should deduct my fair" do
+      subject.balance
+      expect(subject.touch_out(exit)).to eq (5)
+    end
+  end
+
+  describe "#exit_station" do
+    it "should tell me where I touched out at" do
+      subject.touch_out(exit)
+      expect(subject.exit_station).to eq (exit)
+    end
+  end
 
 end

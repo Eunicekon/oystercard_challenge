@@ -1,7 +1,8 @@
 class Station
-  attr_reader :barrier
 
-  def initialize 
-    @barrier = barrier
-  end
+  # def passenger
+  #   @destination = "station"
+  # end
+
+
 end
